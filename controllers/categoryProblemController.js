@@ -1,80 +1,80 @@
 import db from "../models/index.js";
 
-const Role = db.role;
+const Category_problem = db.category_problem;
 
 export const create = async (req, res) => {
-  const role = {
+  const category_problem = {
     name: req.body.name,
   };
-  await Role.create(role)
+  await Category_problem.create(role)
     .then((data) => {
       res.status(200).send(data);
     })
     .catch((error) => {
       res.status(500).send({
         message:
-          error.message || "Some error occurred while creating the Role.",
+          error.message || "Some error occurred while creating the Category_problem.",
       });
     });
 };
 
 export const getAll = async (req, res) => {
-  await Role.findAll()
+  await Category_problem.findAll()
     .then((data) => {
       res.status(200).send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving roles.",
+        message: err.message || "Some error occurred while retrieving Category_problem.",
       });
     });
 };
 
 export const destroy = async (req, res) => {
   const id = req.params.id;
-  await Role.destroy({ id: id })
+  await Category_problem.destroy({ id: id })
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
-          message: "Role was deleted successfully!",
+          message: "Category_problem was deleted successfully!",
         });
       } else {
         res.status(401).send({
-          message: `Cannot delete role with id=${id}. Maybe role was not found!`,
+          message: `Cannot delete Category_problem with id=${id}. Maybe Category_problem was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete role with id=" + id,
+        message: "Could not delete Category_problem with id=" + id,
       });
     });
 };
 
 export const edit = async (req, res) => {
   const id = req.params.id;
-  await Role.update(req.body)
+  await Category_problem.update(req.body)
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
-          message: "Role was updated successfully!",
+          message: "Category_problem was updated successfully!",
         });
       } else {
         res.status(401).send({
-          message: `Cannot update role with id=${id}. Maybe role was not found!`,
+          message: `Cannot update Category_problem with id=${id}. Maybe Category_problem was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not update role with id=" + id,
+        message: "Could not update Category_problem with id=" + id,
       });
     });
 };
 
 export const getOne = async (req, res) => {
   const { id } = req.params;
-  await Role.findOne({
+  await Category_problem.findOne({
     where: { id },
   })
     .then((data) => {
