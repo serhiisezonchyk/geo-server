@@ -8,5 +8,7 @@ router.post('/login',userController.login);
 router.get('/auth',authMiddleware, userController.check);
 router.get('/', userController.getAll);
 router.delete('/:id', userController.destroy);
+router.get('/:id/policies', userController.getPoliciesByUserId);
+
 
 export default router;

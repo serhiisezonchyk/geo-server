@@ -17,23 +17,6 @@ export const getAll = (req, res) => {
     });
     res.status(200).send(response);
   })
-  // try {
-  //   const geom = await pool.query(
-  //     "SELECT gid, ST_AsGeoJSON(geom) FROM public_building_point"
-  //   );
-  //   const response = geom.rows.map((element) => {
-  //     const gid = element.gid;
-  //     const geoJson = JSON.parse(element.st_asgeojson);
-  //     const type = geoJson.type;
-  //     const coordinates = geoJson.coordinates;
-  //     return { gid, type, coordinates };
-  //   });
-  //   res.status(200).send(response);
-  // } catch (err) {
-  //   res.status(500).send({
-  //     message: err.message || "Some error occurred while retrieving shapes.",
-  //   });
-  // }
 };
 
 export const getOne = (req, res) => {

@@ -13,6 +13,6 @@ export default function (req, res, next) {
         req.user = decoded
         next()
     } catch (e) {
-        res.status(401).json({message: "No access"})
+        res.status(401).json({message:" No access"})
     }
 };
