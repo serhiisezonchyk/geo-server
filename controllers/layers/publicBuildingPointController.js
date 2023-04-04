@@ -1,4 +1,4 @@
-import pool from "../models/db.js";
+import pool from "../../models/db.js";
 
 export const getAll = (req, res) => {
   pool.query("SELECT gid, ST_AsGeoJSON(geom) FROM public_building_point",

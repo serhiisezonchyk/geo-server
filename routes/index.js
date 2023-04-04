@@ -1,6 +1,6 @@
 import Router from "express"
-import userShapesRouter  from "./userShapesRouter.js"
-import adminShapesRouter from "./adminShapesRouter.js"
+import publicBuildingPointRouter  from "./layers/publicBuildingPointRouter.js"
+import publicBuildingPolygonRouter from "./layers/publicBuildingPolygonRouter.js"
 import problemInfoPointRouter from "../routes/layers/problemInfoPointRouter.js"
 
 import categoryProblemRouter from "./categoryProblemRouter.js"
@@ -17,8 +17,8 @@ router.use('/user',userRouter);
 router.use('/policy', policyRouter);
 router.use('/rolepolicy',rolePolicyRouter);
 
-router.use('/userShapes', userShapesRouter);
-router.use('/adminShapes', adminShapesRouter);
+router.use('/publicBuildingPoint', publicBuildingPointRouter);
+router.use('/publicBuildingPolygon', publicBuildingPolygonRouter);
 router.use('/probleminfopoint',problemInfoPointRouter);
 
 export default router;
