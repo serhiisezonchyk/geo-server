@@ -6,14 +6,15 @@ export const create = async (req, res) => {
   const category_problem = {
     name: req.body.name,
   };
-  await Category_problem.create(role)
+  await Category_problem.create(category_problem)
     .then((data) => {
       res.status(200).send(data);
     })
-    .catch((error) => {
+    .catch((err) => {
       res.status(500).send({
         message:
-          error.message || "Some error occurred while creating the Category_problem.",
+          err.message ||
+          "Some error occurred while creating the Category_problem.",
       });
     });
 };
@@ -25,14 +26,16 @@ export const getAll = async (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving Category_problem.",
+        message:
+          err.message ||
+          "Some error occurred while retrieving Category_problem.",
       });
     });
 };
 
 export const destroy = async (req, res) => {
   const id = req.params.id;
-  await Category_problem.destroy({ id: id })
+  await Category_problem.destroy({ where: { id: id } })
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
@@ -45,6 +48,7 @@ export const destroy = async (req, res) => {
       }
     })
     .catch((err) => {
+      console.log("Error", err, "/nThe end/n");
       res.status(500).send({
         message: "Could not delete Category_problem with id=" + id,
       });
@@ -53,7 +57,7 @@ export const destroy = async (req, res) => {
 
 export const edit = async (req, res) => {
   const id = req.params.id;
-  await Category_problem.update(req.body)
+  await Category_problem.update(req.body, { where: { id: id } })
     .then((num) => {
       if (num == 1) {
         res.status(200).send({

@@ -13,29 +13,6 @@ const generateJwt = (id, email, role) => {
   });
 };
 
-export const login = async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({
-    where: { email },
-    include: [
-      {
-        model: Role,
-      },
-    ],
-  });
-
-
-  if (!user) {
-    return next(ApiError.internal("Incorrect email or password"));
-  }
-  let comparePassword = compareSync(password, user.password);
-  if (!comparePassword) {
-    return next(ApiError.internal("Incorrect email or password"));
-  }
-  const token = generateJwt(user.id, user.email, user.role.name);
-  res.status(200).send({ token });
-};
-
 export const check = async (req, res, next) => {
   const token = generateJwt(req.user.id, req.user.email, req.user.role);
   res.status(200).send({ token });
@@ -101,13 +78,14 @@ export const getPoliciesByUserId = async (req, res) => {
     console.error(err);
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving policies for user.",
+        err.message ||
+        "Some error occurred while retrieving policies for user.",
     });
   }
 };
 export const destroy = async (req, res) => {
   const id = req.params.id;
-  await User.destroy({ id: id })
+  await User.destroy({ where: { id: id } })
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
@@ -125,4 +103,3 @@ export const destroy = async (req, res) => {
       });
     });
 };
-

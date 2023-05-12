@@ -1,11 +1,11 @@
-import db from '../models/index.js';
+import db from "../models/index.js";
 const Policy = db.policy;
 
 export const create = async (req, res) => {
   const policy = {
     name: req.body.name,
     label: req.body.label,
-    description: req.body.description
+    description: req.body.description,
   };
   await Policy.create(policy)
     .then((data) => {
@@ -26,7 +26,8 @@ export const getAll = async (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving policies.",
+        message:
+          err.message || "Some error occurred while retrieving policies.",
       });
     });
 };
@@ -57,7 +58,7 @@ export const edit = async (req, res) => {
   const policy = {
     name: req.body.name,
     label: req.body.label,
-    description: req.body.description
+    description: req.body.description,
   };
   await Policy.update(policy, { where: { id: id } })
     .then((num) => {

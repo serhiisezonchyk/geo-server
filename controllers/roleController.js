@@ -32,7 +32,7 @@ export const getAll = async (req, res) => {
 
 export const destroy = async (req, res) => {
   const id = req.params.id;
-  await Role.destroy({ id: id })
+  await Role.destroy({ where: { id: id } })
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
@@ -53,7 +53,7 @@ export const destroy = async (req, res) => {
 
 export const edit = async (req, res) => {
   const id = req.params.id;
-  await Role.update(req.body)
+  await Role.update(req.body, { where: { id: id } })
     .then((num) => {
       if (num == 1) {
         res.status(200).send({
