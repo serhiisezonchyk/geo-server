@@ -13,6 +13,28 @@ const generateJwt = (id, email, role) => {
   });
 };
 
+export const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({
+    where: { email },
+    include: [
+      {
+        model: Role,
+      },
+    ],
+  });
+
+  if (!user) {
+    return next(ApiError.internal("Incorrect email or password"));
+  }
+  let comparePassword = compareSync(password, user.password);
+  if (!comparePassword) {
+    return next(ApiError.internal("Incorrect email or password"));
+  }
+  const token = generateJwt(user.id, user.email, user.role.name);
+  res.status(200).send({ token });
+};
+
 export const check = async (req, res, next) => {
   const token = generateJwt(req.user.id, req.user.email, req.user.role);
   res.status(200).send({ token });
@@ -36,9 +58,16 @@ export const create = async (req, res, next) => {
 
   const hashPassword = await hash(newUser.password, 5);
   newUser.password = hashPassword;
-  const user = await User.create(newUser);
-  // const token = generateJwt(user.id, user.email, user.role.name);
-  // res.status(200).send({ token });
+  await User.create(newUser)
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({
+        message:
+          error.message || "Some error occurred while creating the user.",
+      });
+    });
 };
 
 export const getAll = async (req, res) => {
