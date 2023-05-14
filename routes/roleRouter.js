@@ -4,11 +4,10 @@ import roleMiddleware from "../middleware/checkRole.js";
 
 const router = new Router();
 
-// router.post('/',roleMiddleware('ADMIN'),typeController.create)
-router.post('/',roleController.create)
-router.get('/',roleController.getAll)
-router.get('/:id',roleController.getOne)
-router.delete('/:id', roleController.destroy)
-router.put('/:id', roleController.edit)
+router.post('/',roleMiddleware('superuser'),roleController.create)
+router.get('/',roleMiddleware('superuser'),roleController.getAll)
+router.get('/:id',roleMiddleware('superuser'),roleController.getOne)
+router.delete('/:id',roleMiddleware('superuser'), roleController.destroy)
+router.put('/:id',roleMiddleware('superuser'), roleController.edit)
 
 export default router;

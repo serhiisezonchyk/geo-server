@@ -1,13 +1,13 @@
 import Router from "express"
 import * as rolePolicyController from "../controllers/rolePolicyController.js"
+import roleMiddleware from "../middleware/checkRole.js";
 
 const router = new Router();
 
-// router.post('/',roleMiddleware('ADMIN'),typeController.create)
-router.post('/',rolePolicyController.create)
-router.get('/',rolePolicyController.getAll)
-router.get('/:id',rolePolicyController.getOne)
-router.delete('/:id', rolePolicyController.destroy)
-router.put('/:id', rolePolicyController.edit)
+router.post('/',roleMiddleware('superuser'),rolePolicyController.create)
+router.get('/',roleMiddleware('superuser'),rolePolicyController.getAll)
+router.get('/:id',roleMiddleware('superuser'),rolePolicyController.getOne)
+router.delete('/:id',roleMiddleware('superuser'), rolePolicyController.destroy)
+router.put('/:id',roleMiddleware('superuser'), rolePolicyController.edit)
 
 export default router;
