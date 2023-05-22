@@ -5,7 +5,8 @@ import router from "./routes/index.js"
 
 import db from "./models/index.js"
 import errorHandler from "./middleware/ErrorHandling.js";
-
+import { fileURLToPath } from "url";
+import path, { resolve } from "path";
 dotenv.config();
 
 const app = express();
@@ -20,6 +21,13 @@ db.sequelize.sync()
 
 app.use(cors());
 app.use(express.json());
+
+app.use(
+  express.static(
+    resolve(path.dirname(fileURLToPath(import.meta.url)), "static")
+  )
+);
+
 app.use('/api', router);
 
 app.use(errorHandler);

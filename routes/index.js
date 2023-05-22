@@ -8,6 +8,8 @@ import roleRouter from "./roleRouter.js"
 import userRouter from "./userRouter.js"
 import rolePolicyRouter from "./rolePolicyRouter.js"
 import policyRouter from "./policyRouter.js"
+import staticRouter from "./staticRouter.js"
+
 
 const router = new Router();
 
@@ -20,5 +22,6 @@ router.use('/rolepolicy',rolePolicyRouter);
 router.use('/publicBuildingPoint', publicBuildingPointRouter);
 router.use('/publicBuildingPolygon', publicBuildingPolygonRouter);
 router.use('/probleminfopoint',problemInfoPointRouter);
+router.use('/static', staticRouter)
 
 export default router;
