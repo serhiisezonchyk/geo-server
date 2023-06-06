@@ -7,6 +7,8 @@ import db from "./models/index.js"
 import errorHandler from "./middleware/ErrorHandling.js";
 import { fileURLToPath } from "url";
 import path, { resolve } from "path";
+import fileUpload from "express-fileupload";
+
 dotenv.config();
 
 const app = express();
@@ -27,6 +29,7 @@ app.use(
     resolve(path.dirname(fileURLToPath(import.meta.url)), "static")
   )
 );
+app.use(fileUpload({}));
 
 app.use('/api', router);
 

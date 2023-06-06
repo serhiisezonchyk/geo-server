@@ -3,6 +3,7 @@ import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 export const create = async (req, res) => {
+  console.log(req.files);
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send("No files were uploaded.");
   }
