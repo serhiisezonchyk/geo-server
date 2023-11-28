@@ -8,12 +8,14 @@ import errorHandler from "./middleware/ErrorHandling.js";
 import { fileURLToPath } from "url";
 import path, { resolve } from "path";
 import fileUpload from "express-fileupload";
+import swaggerUI from 'swagger-ui-express';
+import swaggerSpec from './controllers/config/swagger.js';
 
 dotenv.config();
 
 const app = express();
 
-db.sequelize.sync()
+db.sequelize.sync({ force: true })
 .then(() => {
   console.log("Synced db.");
 })
@@ -30,7 +32,7 @@ app.use(
   )
 );
 app.use(fileUpload({}));
-
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.use('/api', router);
 
 app.use(errorHandler);
