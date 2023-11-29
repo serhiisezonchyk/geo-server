@@ -12,7 +12,8 @@ const router = new Router();
  *       - Roles
  *     summary: Create a new role
  *     description: Create a new role (Only accessible by superuser)
-
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -32,7 +33,7 @@ const router = new Router();
  *       500:
  *         description: Some error occurred while creating the role
  */
-router.post('/', roleController.create);
+router.post('/', roleMiddleware('superuser'), roleController.create);
 /**
  * @openapi
  * /api/role:
