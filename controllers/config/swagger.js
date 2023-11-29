@@ -20,7 +20,8 @@ const options = {
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT}`,
+        // url: `http://localhost:${process.env.PORT}`,
+        url: 'https://geochernihiv-server.onrender.com'
       },
     ],
     // for all operations
