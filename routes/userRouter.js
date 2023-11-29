@@ -16,8 +16,6 @@ const router = new Router();
  *       - User
  *     summary: Register a new user
  *     description: Create a new user account (Only a superuser can create a new account)
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -49,9 +47,9 @@ const router = new Router();
  */
 router.post(
   '/create',
-  roleMiddleware('superuser'),
-  registerValidation,
-  handleValidationError,
+  // roleMiddleware('superuser'),
+  // registerValidation,
+  // handleValidationError,
   userController.create
 );
 /**

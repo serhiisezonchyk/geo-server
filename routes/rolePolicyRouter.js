@@ -6,7 +6,7 @@ const router = new Router();
 
 /**
  * @openapi
- * /api/role-policies:
+ * /api/rolepolicy:
  *   post:
  *     tags:
  *       - Role Policies
@@ -39,7 +39,7 @@ const router = new Router();
 router.post('/',roleMiddleware('superuser'),rolePolicyController.create)
 /**
  * @openapi
- * /api/role-policies:
+ * /api/rolepolicy:
  *   get:
  *     tags:
  *       - Role Policies
@@ -58,7 +58,7 @@ router.post('/',roleMiddleware('superuser'),rolePolicyController.create)
 router.get('/',roleMiddleware('superuser'),rolePolicyController.getAll)
 /**
  * @openapi
- * /api/role-policies/{id}:
+ * /api/rolepolicy/{id}:
  *   get:
  *     tags:
  *       - Role Policies
@@ -84,7 +84,7 @@ router.get('/',roleMiddleware('superuser'),rolePolicyController.getAll)
 router.get('/:id',roleMiddleware('superuser'),rolePolicyController.getOne)
 /**
  * @openapi
- * /api/role-policies/{id}:
+ * /api/rolepolicy/{id}:
  *   delete:
  *     tags:
  *       - Role Policies
@@ -110,7 +110,7 @@ router.get('/:id',roleMiddleware('superuser'),rolePolicyController.getOne)
 router.delete('/:id',roleMiddleware('superuser'), rolePolicyController.destroy)
 /**
  * @openapi
- * /api/role-policies/{id}:
+ * /api/rolepolicy/{id}:
  *   put:
  *     tags:
  *       - Role Policies

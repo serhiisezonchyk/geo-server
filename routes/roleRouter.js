@@ -1,19 +1,18 @@
-import Router from "express"
-import * as roleController from "../controllers/roleController.js"
-import roleMiddleware from "../middleware/checkRole.js";
+import Router from 'express';
+import * as roleController from '../controllers/roleController.js';
+import roleMiddleware from '../middleware/checkRole.js';
 
 const router = new Router();
 
 /**
  * @openapi
- * /api/roles:
+ * /api/role:
  *   post:
  *     tags:
  *       - Roles
  *     summary: Create a new role
  *     description: Create a new role (Only accessible by superuser)
- *     security:
- *       - bearerAuth: []
+
  *     requestBody:
  *       required: true
  *       content:
@@ -33,10 +32,10 @@ const router = new Router();
  *       500:
  *         description: Some error occurred while creating the role
  */
-router.post('/',roleMiddleware('superuser'),roleController.create)
+router.post('/', roleController.create);
 /**
  * @openapi
- * /api/roles:
+ * /api/role:
  *   get:
  *     tags:
  *       - Roles
@@ -52,10 +51,10 @@ router.post('/',roleMiddleware('superuser'),roleController.create)
  *       500:
  *         description: Some error occurred while retrieving roles
  */
-router.get('/',roleMiddleware('superuser'),roleController.getAll)
+router.get('/', roleMiddleware('superuser'), roleController.getAll);
 /**
  * @openapi
- * /api/roles/{id}:
+ * /api/role/{id}:
  *   get:
  *     tags:
  *       - Roles
@@ -78,10 +77,10 @@ router.get('/',roleMiddleware('superuser'),roleController.getAll)
  *       500:
  *         description: Some error occurred while retrieving role
  */
-router.get('/:id',roleMiddleware('superuser'),roleController.getOne)
+router.get('/:id', roleMiddleware('superuser'), roleController.getOne);
 /**
  * @openapi
- * /api/roles/{id}:
+ * /api/role/{id}:
  *   delete:
  *     tags:
  *       - Roles
@@ -104,10 +103,10 @@ router.get('/:id',roleMiddleware('superuser'),roleController.getOne)
  *       500:
  *         description: Could not delete role
  */
-router.delete('/:id',roleMiddleware('superuser'), roleController.destroy)
+router.delete('/:id', roleMiddleware('superuser'), roleController.destroy);
 /**
  * @openapi
- * /api/roles/{id}:
+ * /api/role/{id}:
  *   put:
  *     tags:
  *       - Roles
@@ -141,6 +140,6 @@ router.delete('/:id',roleMiddleware('superuser'), roleController.destroy)
  *       500:
  *         description: Could not update role
  */
-router.put('/:id',roleMiddleware('superuser'), roleController.edit)
+router.put('/:id', roleMiddleware('superuser'), roleController.edit);
 
 export default router;

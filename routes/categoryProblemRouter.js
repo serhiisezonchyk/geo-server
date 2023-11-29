@@ -9,7 +9,7 @@ const router = new Router();
 
 /**
  * @openapi
- * /api/category-problem:
+ * /api/categoryProblem:
  *   post:
  *     tags:
  *       - Category Problem
@@ -41,7 +41,7 @@ const router = new Router();
 router.post('/',checkAuthMiddleware,categoryProblemValidation,handleValidationError,categoryProblemController.create)
 /**
  * @openapi
- * /api/category-problem:
+ * /api/categoryProblem:
  *   get:
  *     tags:
  *       - Category Problem
@@ -56,7 +56,7 @@ router.post('/',checkAuthMiddleware,categoryProblemValidation,handleValidationEr
 router.get('/',categoryProblemController.getAll)
 /**
  * @openapi
- * /api/category-problem/{id}:
+ * /api/categoryProblem/{id}:
  *   get:
  *     tags:
  *       - Category Problem
@@ -78,7 +78,7 @@ router.get('/',categoryProblemController.getAll)
 router.get('/:id',categoryProblemController.getOne)
 /**
  * @openapi
- * /api/category-problem/{id}:
+ * /api/categoryProblem/{id}:
  *   delete:
  *     tags:
  *       - Category Problem
@@ -104,7 +104,7 @@ router.get('/:id',categoryProblemController.getOne)
 router.delete('/:id',roleMiddleware('superuser'), categoryProblemController.destroy)
 /**
  * @openapi
- * /api/category-problem/{id}:
+ * /api/categoryProblem/{id}:
  *   put:
  *     tags:
  *       - Category Problem

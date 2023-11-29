@@ -18,6 +18,11 @@ const options = {
         },
       },
     },
+    servers: [
+      {
+        url: `http://localhost:${process.env.PORT}`,
+      },
+    ],
     // for all operations
     // security:[
     //   {

@@ -1,21 +1,19 @@
-import Router from "express"
-import * as policyController from "../controllers/policyController.js"
-import { policyValidation } from "../validators/index.js";
-import handleValidationError from "../middleware/handleValidationError.js";
-import roleMiddleware from "../middleware/checkRole.js";
+import Router from 'express';
+import * as policyController from '../controllers/policyController.js';
+import { policyValidation } from '../validators/index.js';
+import handleValidationError from '../middleware/handleValidationError.js';
+import roleMiddleware from '../middleware/checkRole.js';
 
 const router = new Router();
 
 /**
  * @openapi
- * /api/policies:
+ * /api/policy:
  *   post:
  *     tags:
  *       - Policies
  *     summary: Create a new policy
  *     description: Create a new policy (Only accessible by superuser)
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -43,10 +41,16 @@ const router = new Router();
  *       500:
  *         description: Some error occurred while creating the policy
  */
-router.post('/',roleMiddleware('superuser'),policyValidation, handleValidationError,policyController.create)
+router.post(
+  '/',
+//   roleMiddleware('superuser'),
+//   policyValidation,
+//   handleValidationError,
+  policyController.create
+);
 /**
  * @openapi
- * /api/policies:
+ * /api/policy:
  *   get:
  *     tags:
  *       - Policies
@@ -62,7 +66,7 @@ router.post('/',roleMiddleware('superuser'),policyValidation, handleValidationEr
  *       500:
  *         description: Some error occurred while retrieving policies
  */
-router.get('/',roleMiddleware('superuser'),policyController.getAll)
+router.get('/', roleMiddleware('superuser'), policyController.getAll);
 /**
  * @openapi
  * /api/policies/{id}:
@@ -88,10 +92,10 @@ router.get('/',roleMiddleware('superuser'),policyController.getAll)
  *       500:
  *         description: Some error occurred while retrieving policy
  */
-router.get('/:id',roleMiddleware('superuser'),policyController.getOne)
+router.get('/:id', roleMiddleware('superuser'), policyController.getOne);
 /**
  * @openapi
- * /api/policies/{id}:
+ * /api/policy/{id}:
  *   delete:
  *     tags:
  *       - Policies
@@ -114,10 +118,10 @@ router.get('/:id',roleMiddleware('superuser'),policyController.getOne)
  *       500:
  *         description: Could not delete policy
  */
-router.delete('/:id',roleMiddleware('superuser'), policyController.destroy)
+router.delete('/:id', roleMiddleware('superuser'), policyController.destroy);
 /**
  * @openapi
- * /api/policies/{id}:
+ * /api/policy/{id}:
  *   put:
  *     tags:
  *       - Policies
@@ -159,6 +163,12 @@ router.delete('/:id',roleMiddleware('superuser'), policyController.destroy)
  *       500:
  *         description: Could not update policy
  */
-router.put('/:id',roleMiddleware('superuser'),policyValidation, handleValidationError, policyController.edit)
+router.put(
+  '/:id',
+  roleMiddleware('superuser'),
+  policyValidation,
+  handleValidationError,
+  policyController.edit
+);
 
 export default router;
