@@ -5,7 +5,7 @@ export const getAll = (req, res) => {
   (error, geom) => {
     if(error){
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving shapes.",
+        message: error.message || "Some error occurred while retrieving shapes.",
       });
     }
     const response = geom.rows.map((element) => {
