@@ -8,6 +8,7 @@ export const getAll = (req, res) => {
         message: error.message || "Some error occurred while retrieving shapes.",
       });
     }
+    console.log(geom)
     const response = geom.rows.map((element) => {
       const gid = element.gid;
       const geoJson = JSON.parse(element.st_asgeojson);

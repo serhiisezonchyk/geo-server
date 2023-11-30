@@ -14,6 +14,8 @@ const router = new Router();
  *       - Policies
  *     summary: Create a new policy
  *     description: Create a new policy (Only accessible by superuser)
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -43,9 +45,9 @@ const router = new Router();
  */
 router.post(
   '/',
-//   roleMiddleware('superuser'),
-//   policyValidation,
-//   handleValidationError,
+  roleMiddleware('superuser'),
+  policyValidation,
+  handleValidationError,
   policyController.create
 );
 /**
